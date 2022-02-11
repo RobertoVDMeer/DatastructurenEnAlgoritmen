@@ -24,7 +24,7 @@ public class Les1 {
 
     System.out.println(MessageFormat.format(
         "total unique pairs found for sum {0}: {1}"
-        , targetSum, pairsTotalNum(nums, targetSum)));
+        , targetSum, solutionQuizOne(nums, targetSum)));
   }
 
   public static int pairsTotalNum(int[] nums, int targetSum) {
@@ -71,6 +71,29 @@ public class Les1 {
       }
     }
     return totalPairs;
+  }
+
+  public static int solutionQuizOne(int[] arr, int targetSum) {
+    Arrays.sort(arr);
+    int left = 0;
+    int right = arr.length - 1;
+
+    int toTarget = 0;
+
+    while (left < right) {
+      int currentSum = arr[left] + arr[right];
+      if (currentSum == targetSum) {
+        toTarget += 1;// res.add(Arrays.asList(arr[left], arr[right]));
+        System.out.println(arr[left] + " " + arr[right]);
+        while (left < right && arr[left] == arr[++left]) ;
+        while (left < right && arr[right] == arr[--right]) ;
+      } else if (currentSum > targetSum) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+    return toTarget;
   }
 
 }
