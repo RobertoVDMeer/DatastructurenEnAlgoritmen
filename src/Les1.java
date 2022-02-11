@@ -27,7 +27,7 @@ public class Les1 {
         , targetSum, solutionQuizOne(nums, targetSum)));
   }
 
-  public static int pairsTotalNum(int[] nums, int targetSum) {
+  public static int quizOne(int[] nums, int targetSum) {
     Arrays.sort(nums);
 
     int lowI = 0;
