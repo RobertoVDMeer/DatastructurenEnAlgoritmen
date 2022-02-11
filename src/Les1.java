@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Les1 {
-  public static String filePath = "./src/real-01.txt";
+  public static String filePath = "./src/sample-01.txt";
 
   public static void main(String args[]) throws FileNotFoundException {
     Scanner scanner = new Scanner(new File(filePath));
@@ -22,9 +22,11 @@ public class Les1 {
       }
     }
 
+    nums = new int[] {1, -1, 0, 2, 3};
+    targetSum = 2;
     System.out.println(MessageFormat.format(
         "total unique pairs found for sum {0}: {1}"
-        , targetSum, solutionQuizOne(nums, targetSum)));
+        , targetSum, quizTwo(nums, targetSum)));
   }
 
   public static int quizOne(int[] nums, int targetSum) {
@@ -94,6 +96,13 @@ public class Les1 {
       }
     }
     return toTarget;
+  }
+
+  public static int quizTwo(int[] arr, int targetSum) {
+    int matches = 0;
+    Arrays.sort(arr);
+
+    return matches;
   }
 
 }
