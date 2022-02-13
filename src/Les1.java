@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Les1 {
-  public static String filePath = "./src/sample-01.txt";
+//  public static String filePath = "./src/sample-01.txt";
+  public static String filePath = "./src/real-01.txt";
 
   public static void main(String args[]) throws FileNotFoundException {
     Scanner scanner = new Scanner(new File(filePath));
@@ -22,17 +23,21 @@ public class Les1 {
       }
     }
 
-    nums = new int[] {1, -1, 0, 2, 3};
-    targetSum = 2;
+//    System.out.println(MessageFormat.format(
+//        "total unique pairs found for sum {0}: {1}"
+//        , targetSum, findPairs(nums, targetSum, 0)));
+
+//    nums = new int[] {1, -1, 0, 2, 3};
+//    targetSum = 2;
     System.out.println(MessageFormat.format(
-        "total unique pairs found for sum {0}: {1}"
-        , targetSum, quizTwo(nums, targetSum)));
+        "total unique triplets found for sum {0}: {1}"
+        , targetSum, findTriplets(nums, targetSum)));
   }
 
-  public static int quizOne(int[] nums, int targetSum) {
+  public static int findPairs(int[] nums, int targetSum, int startIndex) {
     Arrays.sort(nums);
 
-    int lowI = 0;
+    int lowI = startIndex;
     int highI = nums.length - 1;
     int highNum = nums[highI];
     int lowNum = nums[lowI];
@@ -56,8 +61,8 @@ public class Les1 {
         totalPairs++;
         lowI++;
         highI = nums.length - 1;
-        System.out.println(MessageFormat.format("Found a match: " +
-            "{0} + {1} = {2}", lowNum, highNum, sum));
+//        System.out.println(MessageFormat.format("Found a match: " +
+//            "{0} + {1} = {2}", lowNum, highNum, sum));
       } else if (sum > targetSum) {
         highI--;
       } else {
@@ -98,12 +103,17 @@ public class Les1 {
     return toTarget;
   }
 
-  public static int quizTwo(int[] arr, int targetSum) {
+  public static int findTriplets(int[] arr, int targetSum) {
     int matches = 0;
     Arrays.sort(arr);
+    int curr = 0;
+
+    while (arr[curr] < targetSum && curr != arr.length - 3) {
+      matches += findPairs(arr, targetSum - arr[curr], curr +1);
+      curr++;
+    }
 
     return matches;
   }
-
 }
 
