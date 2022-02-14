@@ -26,8 +26,6 @@ public class Les1 {
 //    nums = new int[] {30, 14, 3, 20, 4};
 //    targetSum = 64;
 
-    System.out.println(Arrays.toString(nums));
-
     // The old
 //    System.out.println(MessageFormat.format(
 //        "Total unique {0} found for sum {1}: {2}"
@@ -37,9 +35,12 @@ public class Les1 {
 //    System.out.println(MessageFormat.format(
 //        "Total unique {0} found for sum {1}: {2}"
 //        , "pairs",  targetSum, findPairs(nums, targetSum, 0)));
-    System.out.println(MessageFormat.format(
-        "Total unique {0} found for sum {1}: {2}"
-        , "triplets",  targetSum, findTriplets(nums, targetSum)));
+
+//    System.out.println(MessageFormat.format(
+//        "Total unique {0} found for sum {1}: {2}"
+//        , "triplets",  targetSum, findTriplets(nums, targetSum)));
+
+    fishyFishy();
   }
 
   public static int findPairs(int[] nums, int targetSum, int low) {
@@ -95,6 +96,10 @@ public class Les1 {
     } else {
       return binSearchRec(nums, target, middle + 1, high);
     }
+  }
+
+  public static void fishyFishy() {
+    System.out.println("blurg");
   }
 
   // startI is used by findTriplets, basically saying which number it is
