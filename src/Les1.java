@@ -37,7 +37,7 @@ public class Les1 {
     int totalPairs = 0;
 
     // TODO On refactoring, realized these highNum and lowNum aren't needed,
-    // TODO will leave it though, as I plan to rename the method into frankenCode anyway!
+    // TODO will leave it though, as I plan to rename the method to frankenCode anyway!
     int highNum = nums[highI];
     int lowNum = nums[lowI];
 
