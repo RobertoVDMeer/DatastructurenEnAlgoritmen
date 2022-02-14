@@ -23,9 +23,13 @@ public class Les1 {
       }
     }
 
-//    System.out.println(MessageFormat.format(
-//        "Total unique {0} found for sum {1}: {2}"
-//        , "pairs",  targetSum, findPairs(nums, targetSum, 0)));
+    System.out.println(MessageFormat.format(
+        "Total unique {0} found for sum {1}: {2}"
+        , "pairs",  targetSum, frankenPairs(nums, targetSum, 0)));
+
+    System.out.println(MessageFormat.format(
+        "Total unique {0} found for sum {1}: {2}"
+        , "pairs",  targetSum, frankenPairs(nums, targetSum, 0)));
 
 //    System.out.println(MessageFormat.format(
 //        "Total unique {0} found for sum {1}: {2}"
@@ -34,7 +38,7 @@ public class Les1 {
 
   // startI is used by findTriplets, basically saying which number it is
   // and ignore anything before / lower / left of that
-  public static int findPairs(int[] nums, int targetSum, int startI) {
+  public static int frankenPairs(int[] nums, int targetSum, int startI) {
     Arrays.sort(nums);
     int lowI = startI;
     int highI = nums.length - 1;
@@ -102,7 +106,7 @@ public class Les1 {
 
     while (nums[i] < targetSum && i != nums.length - 2) {
       // just find pairs for the sum minus the current number
-      matches += findPairs(nums, targetSum - nums[i], i + 1);
+      matches += frankenPairs(nums, targetSum - nums[i], i + 1);
       i++;
     }
 
