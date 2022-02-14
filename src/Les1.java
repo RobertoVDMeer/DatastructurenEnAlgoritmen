@@ -23,9 +23,13 @@ public class Les1 {
       }
     }
 
-    System.out.println(MessageFormat.format(
-        "Total unique {0} found for sum {1}: {2}"
-        , "triplets",  targetSum, findTriplets(nums, targetSum)));
+//    System.out.println(MessageFormat.format(
+//        "Total unique {0} found for sum {1}: {2}"
+//        , "pairs",  targetSum, findPairs(nums, targetSum, 0)));
+
+//    System.out.println(MessageFormat.format(
+//        "Total unique {0} found for sum {1}: {2}"
+//        , "triplets",  targetSum, findTriplets(nums, targetSum)));
   }
 
   // startI is used by findTriplets, basically saying which number it is
