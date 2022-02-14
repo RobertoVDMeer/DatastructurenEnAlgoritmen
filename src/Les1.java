@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.io.File;
@@ -99,7 +100,31 @@ public class Les1 {
   }
 
   public static void fishyFishy() {
-    System.out.println("blurg");
+    final byte BIRTHING = 0;
+    final byte REST = 6;
+    final byte BORN = 8;
+
+    byte[] school = new byte[] {3, 4, 3, 1, 2};
+    int days = 80;
+
+    for (int i = 0; i < days; i++) {
+      int newlyBorn = 0;
+
+      for (int k = 0; k < school.length; k++) {
+          if (school[k] == BIRTHING) {
+            newlyBorn++;
+            school[k] = REST;
+          } else {
+            school[k]--;
+          }
+      }
+
+      if (newlyBorn > 0) {
+        school = Arrays.copyOf(school, school.length + newlyBorn);
+        Arrays.fill(school,school.length - newlyBorn,school.length, BORN);
+      }
+    }
+    System.out.println(school.length);
   }
 
   // startI is used by findTriplets, basically saying which number it is
