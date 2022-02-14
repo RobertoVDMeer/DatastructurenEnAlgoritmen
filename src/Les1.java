@@ -28,17 +28,73 @@ public class Les1 {
 
     System.out.println(Arrays.toString(nums));
 
+    // The old
 //    System.out.println(MessageFormat.format(
 //        "Total unique {0} found for sum {1}: {2}"
 //        , "pairs",  targetSum, frankenPairs(nums, targetSum, 0)));
 
+    // the new
 //    System.out.println(MessageFormat.format(
 //        "Total unique {0} found for sum {1}: {2}"
 //        , "pairs",  targetSum, findPairs(nums, targetSum, 0)));
-
     System.out.println(MessageFormat.format(
         "Total unique {0} found for sum {1}: {2}"
         , "triplets",  targetSum, findTriplets(nums, targetSum)));
+  }
+
+  public static int findPairs(int[] nums, int targetSum, int low) {
+    Arrays.sort(nums);
+    int matches = 0;
+
+    while (low < nums.length - 1) {
+      // check for duplicates
+      if (low != 0 && nums[low] == nums[low -1]) { low++; continue; }
+
+      int high = binSearchRec(nums, targetSum - nums[low], low + 1, nums.length -1);
+
+      // binSearch returns -1 if no match
+      if (high != -1) {
+        // check for duplicates
+        if ( nums[high -1] == nums[high]) continue;
+
+        matches++;
+      }
+      low++;
+    }
+
+    return matches;
+  }
+
+  public static int findTriplets(int[] nums, int targetSum) {
+    Arrays.sort(nums);
+    int matches = 0;
+    int i = 0;
+
+    while (nums[i] < targetSum && i != nums.length - 2) {
+      // just find pairs for the sum minus the current number
+      matches += findPairs(nums, targetSum - nums[i], i + 1);
+      i++;
+    }
+    return matches;
+  }
+
+  // Binary search: find middle of range and check, then ignore half the array
+  // depending on if it was higher or lower, until the target number is found.
+  // Recursive implementation: method will call itself until solved, before returning
+  // to caller
+  public static int binSearchRec(int[] nums, int target, int low, int high) {
+    if (high < low) return -1;
+    int middle = low + ((high - low) /2);
+
+    if(nums[middle] == target) {
+      return middle;
+    }
+
+    if(nums[middle] > target) {
+      return binSearchRec(nums, target, low, middle - 1);
+    } else {
+      return binSearchRec(nums, target, middle + 1, high);
+    }
   }
 
   // startI is used by findTriplets, basically saying which number it is
@@ -77,10 +133,10 @@ public class Les1 {
 
         if (startI == 0) {
           System.out.println(MessageFormat.format("Found a match: " +
-            "{0} + {1} = {2}", lowNum, highNum, sum));
+              "{0} + {1} = {2}", lowNum, highNum, sum));
         } else {
           System.out.println(MessageFormat.format("Found a match: " +
-              "{0} + {1} + {2} = {3}",nums[startI - 1], lowNum, highNum
+                  "{0} + {1} + {2} = {3}",nums[startI - 1], lowNum, highNum
               , sum + nums[startI -1]));
         }
       } else if (sum > targetSum) {
@@ -103,60 +159,4 @@ public class Les1 {
     }
     return totalPairs;
   }
-
-  public static int findPairs(int[] nums, int targetSum, int low) {
-    Arrays.sort(nums);
-    int matches = 0;
-
-    while (low < nums.length - 1) {
-      // check for duplicates
-      if (low != 0 && nums[low] == nums[low -1]) { low++; continue; }
-
-      int high = binSearchRec(nums, targetSum - nums[low], low + 1, nums.length -1);
-
-      // binSearch returns -1 if no match
-      if (high != -1) {
-        // check for duplicates
-        if ( nums[high -1] == nums[high]) continue;
-
-        matches++;
-      }
-      low++;
-    }
-
-    return matches;
-  }
-
-  // Binary search: find middle of range and check, then ignore half the array
-  // depending on if it was higher or lower, until the target number is found.
-  // Recursive implementation: method will call itself until solved, before returning
-  // to caller
-  public static int binSearchRec(int[] nums, int target, int low, int high) {
-    if (high < low) return -1;
-    int middle = low + ((high - low) /2);
-
-    if(nums[middle] == target) {
-      return middle;
-    }
-
-    if(nums[middle] > target) {
-      return binSearchRec(nums, target, low, middle - 1);
-    } else {
-      return binSearchRec(nums, target, middle + 1, high);
-    }
-  }
-
-  public static int findTriplets(int[] nums, int targetSum) {
-    Arrays.sort(nums);
-    int matches = 0;
-    int i = 0;
-
-    while (nums[i] < targetSum && i != nums.length - 2) {
-      // just find pairs for the sum minus the current number
-      matches += findPairs(nums, targetSum - nums[i], i + 1);
-      i++;
-    }
-    return matches;
-  }
 }
-
