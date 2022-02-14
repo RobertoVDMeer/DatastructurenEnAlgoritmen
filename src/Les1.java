@@ -29,7 +29,7 @@ public class Les1 {
 
     System.out.println(MessageFormat.format(
         "Total unique {0} found for sum {1}: {2}"
-        , "pairs",  targetSum, frankenPairs(nums, targetSum, 0)));
+        , "pairs",  targetSum, findPairs(nums, targetSum, 0)));
 
 //    System.out.println(MessageFormat.format(
 //        "Total unique {0} found for sum {1}: {2}"
@@ -97,6 +97,45 @@ public class Les1 {
       }
     }
     return totalPairs;
+  }
+
+  public static int findPairs(int[] nums, int targetSum, int low) {
+    Arrays.sort(nums);
+    int matches = 0;
+
+    while (low < nums.length - 1) {
+      // check for doubles
+      if (low != 0 && nums[low] == nums[low -1]) { low++; continue; }
+
+      int high = binSearchRec(nums, targetSum, low, nums.length -1);
+
+      // binSearch returns -1 if no match
+      if(high > -1) {
+        matches++;
+
+        printMatchMessage(nums, low, high);
+      }
+
+    }
+
+    return matches;
+  }
+
+  private static void printMatchMessage(int[] nums, int low, int high) {
+    // looking for pairs or triplets?
+    if (low == 0) {
+      System.out.println(MessageFormat.format("Found a match: " +
+          "{0} + {1} = {2}", nums[low], nums[high], nums[low] + nums[high]));
+    } else {
+      System.out.println(MessageFormat.format("Found a match: " +
+              "{0} + {1} + {2} = {3}", nums[low - 1], nums[low], nums[high]
+          , nums[low -1] + nums[low], nums[high]));
+    }
+  }
+
+  public static int binSearchRec(int[] nums, int target, int low, int high) {
+
+    return -1;
   }
 
   public static int findTriplets(int[] nums, int targetSum) {
