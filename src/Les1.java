@@ -101,9 +101,9 @@ public class Les1 {
 
   public static void fishyFishy() {
 
-//    byte[] school = new byte[] {3, 4, 3, 1, 2};
-    byte[] school = new byte[] {3,5,1,2,5,4,1,5,1,2,5,5,1,3,1,5,1,3,2,1,5,1,1,1,2,3,1,3,1,2,1,1,5,1,5,4,5,5,3,3,1,5,1,1,5,5,1,3,5,5,3,2,2,4,1,5,3,4,2,5,4,1,2,2,5,1,1,2,4,4,1,3,1,3,1,1,2,2,1,1,5,1,1,4,4,5,5,1,2,1,4,1,1,4,4,3,4,2,2,3,3,2,1,3,3,2,1,1,1,2,1,4,2,2,1,5,5,3,4,5,5,2,5,2,2,5,3,3,1,2,4,2,1,5,1,1,2,3,5,5,1,1,5,5,1,4,5,3,5,2,3,2,4,3,1,4,2,5,1,3,2,1,1,3,4,2,1,1,1,1,2,1,4,3,1,3,1,2,4,1,2,4,3,2,3,5,5,3,3,1,2,3,4,5,2,4,5,1,1,1,4,5,3,5,3,5,1,1,5,1,5,3,1,2,3,4,1,1,4,1,2,4,1,5,4,1,5,4,2,1,5,2,1,3,5,5,4,5,5,1,1,4,1,2,3,5,3,3,1,1,1,4,3,1,1,4,1,5,3,5,1,4,2,5,1,1,4,4,4,2,5,1,2,5,2,1,3,1,5,1,2,1,1,5,2,4,2,1,3,5,5,4,1,1,1,5,5,2,1,1};
-    int days = 80;
+    byte[] school = new byte[] {3, 4, 3, 1, 2};
+//    byte[] school = new byte[] {3,5,1,2,5,4,1,5,1,2,5,5,1,3,1,5,1,3,2,1,5,1,1,1,2,3,1,3,1,2,1,1,5,1,5,4,5,5,3,3,1,5,1,1,5,5,1,3,5,5,3,2,2,4,1,5,3,4,2,5,4,1,2,2,5,1,1,2,4,4,1,3,1,3,1,1,2,2,1,1,5,1,1,4,4,5,5,1,2,1,4,1,1,4,4,3,4,2,2,3,3,2,1,3,3,2,1,1,1,2,1,4,2,2,1,5,5,3,4,5,5,2,5,2,2,5,3,3,1,2,4,2,1,5,1,1,2,3,5,5,1,1,5,5,1,4,5,3,5,2,3,2,4,3,1,4,2,5,1,3,2,1,1,3,4,2,1,1,1,1,2,1,4,3,1,3,1,2,4,1,2,4,3,2,3,5,5,3,3,1,2,3,4,5,2,4,5,1,1,1,4,5,3,5,3,5,1,1,5,1,5,3,1,2,3,4,1,1,4,1,2,4,1,5,4,1,5,4,2,1,5,2,1,3,5,5,4,5,5,1,1,4,1,2,3,5,3,3,1,1,1,4,3,1,1,4,1,5,3,5,1,4,2,5,1,1,4,4,4,2,5,1,2,5,2,1,3,1,5,1,2,1,1,5,2,4,2,1,3,5,5,4,1,1,1,5,5,2,1,1};
+    int days = 256;
 
 //    fishyOne(school, days);
     fishyTwo(school, days);
@@ -135,11 +135,34 @@ public class Les1 {
   }
 
   private static void fishyTwo (byte[] origSchool, int days) {
-    final byte BIRTHING = 0;
-    final byte REST = 5;
-    final byte BORN = 7;
+    final int BIRTHING = 0;
+    final int RESTING = 6;
+    final int BORN = 8;
+    long[] school = new long[9];
+    long totalFish = 0;
 
-    System.out.println("Love is in the air!");
+    // fill the initial school
+    for (int i = 0; i < origSchool.length; i++) {
+      school[origSchool[i]]++;
+    }
+
+    // Every day, pop out the BIRTHING, shift everything left, then add the
+    // BIRTHING to RESTING and BORN
+    for (int i = 0; i < days; i++) {
+      long births = school[BIRTHING];
+
+      for (int prev = 0, curr = 1; curr < school.length; prev++, curr++) {
+          school[prev] = school[curr];
+      }
+      school[RESTING] += births;
+      school[BORN] = births;
+    }
+
+    for (int i = 0; i < school.length; i++) {
+      totalFish += school[i];
+    }
+
+    System.out.println(totalFish);
   }
 
   // startI is used by findTriplets, basically saying which number it is
