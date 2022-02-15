@@ -100,12 +100,19 @@ public class Les1 {
   }
 
   public static void fishyFishy() {
+
+//    byte[] school = new byte[] {3, 4, 3, 1, 2};
+    byte[] school = new byte[] {3,5,1,2,5,4,1,5,1,2,5,5,1,3,1,5,1,3,2,1,5,1,1,1,2,3,1,3,1,2,1,1,5,1,5,4,5,5,3,3,1,5,1,1,5,5,1,3,5,5,3,2,2,4,1,5,3,4,2,5,4,1,2,2,5,1,1,2,4,4,1,3,1,3,1,1,2,2,1,1,5,1,1,4,4,5,5,1,2,1,4,1,1,4,4,3,4,2,2,3,3,2,1,3,3,2,1,1,1,2,1,4,2,2,1,5,5,3,4,5,5,2,5,2,2,5,3,3,1,2,4,2,1,5,1,1,2,3,5,5,1,1,5,5,1,4,5,3,5,2,3,2,4,3,1,4,2,5,1,3,2,1,1,3,4,2,1,1,1,1,2,1,4,3,1,3,1,2,4,1,2,4,3,2,3,5,5,3,3,1,2,3,4,5,2,4,5,1,1,1,4,5,3,5,3,5,1,1,5,1,5,3,1,2,3,4,1,1,4,1,2,4,1,5,4,1,5,4,2,1,5,2,1,3,5,5,4,5,5,1,1,4,1,2,3,5,3,3,1,1,1,4,3,1,1,4,1,5,3,5,1,4,2,5,1,1,4,4,4,2,5,1,2,5,2,1,3,1,5,1,2,1,1,5,2,4,2,1,3,5,5,4,1,1,1,5,5,2,1,1};
+    int days = 80;
+
+//    fishyOne(school, days);
+    fishyTwo(school, days);
+  }
+
+  private static void fishyOne(byte[] school, int days) {
     final byte BIRTHING = 0;
     final byte REST = 6;
     final byte BORN = 8;
-
-    byte[] school = new byte[] {3, 4, 3, 1, 2};
-    int days = 80;
 
     for (int i = 0; i < days; i++) {
       int newlyBorn = 0;
@@ -121,10 +128,18 @@ public class Les1 {
 
       if (newlyBorn > 0) {
         school = Arrays.copyOf(school, school.length + newlyBorn);
-        Arrays.fill(school,school.length - newlyBorn,school.length, BORN);
+        Arrays.fill(school, school.length - newlyBorn, school.length, BORN);
       }
     }
     System.out.println(school.length);
+  }
+
+  private static void fishyTwo (byte[] origSchool, int days) {
+    final byte BIRTHING = 0;
+    final byte REST = 5;
+    final byte BORN = 7;
+
+    System.out.println("Love is in the air!");
   }
 
   // startI is used by findTriplets, basically saying which number it is
